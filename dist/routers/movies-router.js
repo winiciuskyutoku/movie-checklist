@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var validate_schema_1 = require("../middlewares/validate-schema");
+var movie_controllers_1 = require("../controllers/movie-controllers");
+var express_1 = require("express");
+var movies_schemas_1 = require("../schemas/movies-schemas");
+var movieRouter = (0, express_1.Router)();
+movieRouter.get("/get-movies", movie_controllers_1.getMovies);
+movieRouter.post("/post-movies", (0, validate_schema_1.validateSchema)(movies_schemas_1.movieSchema), movie_controllers_1.postMovies);
+movieRouter.put("/update-movies/:id", movie_controllers_1.updateMovies);
+movieRouter.delete("/delete-movies/:id", movie_controllers_1.deleteMovies);
+exports.default = movieRouter;
